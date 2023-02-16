@@ -1,0 +1,20 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: eventhubs-input
+spec:
+  type: bindings.azure.eventhubs
+  version: v1
+  metadata:
+  - name: connectionString     
+    value: "Endpoint=sb://eh-101.servicebus.windows.net/;SharedAccessKeyName=read-dt;SharedAccessKey=I4lv80Yk7UaxB2Bn1CorBFeGXFQupIQ6FFUmFiVcy1g=;EntityPath=dt-output"
+  - name: consumerGroup
+    value: "dapr-consumer"
+  - name: storageAccountName
+    value: "dt101sta"
+  - name: storageAccountKey
+    value: "P6InFS8NAPoXmobQygSNg+JXhu/QIR7ecenMRboJlakkvWl5RWpQilP1g1lxbiSHJ6naESa2SsBg+AStMRVstg=="
+  - name: storageContainerName
+    value: "pubsub-leases"
+  - name: requireAllProperties
+    value: true

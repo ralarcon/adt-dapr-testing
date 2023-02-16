@@ -1,0 +1,12 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: sb-input
+spec:
+  type: bindings.azure.servicebusqueues
+  version: v1
+  metadata:
+  - name: connectionString # Required when not using Azure Authentication.
+    value: "Endpoint=sb://dt-output-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Y9uBhK7A87e/dFi3kVj1T3vYHfmAcvdUW+ASbINmo14="
+  - name: queueName
+    value: dt-dapr-queue

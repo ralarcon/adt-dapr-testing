@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "iot_dt_device": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7136",
+      "launchBrowser": false
+    }
+  }
+}

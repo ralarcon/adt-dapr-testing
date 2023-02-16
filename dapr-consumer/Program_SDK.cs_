@@ -1,0 +1,77 @@
+// using System.Text;
+// using System.Text.Json;
+// using System.Text.Json.Serialization;
+// using Dapr;
+// using Dapr.Client;
+// using Microsoft.AspNetCore.Http.Headers;
+// using Microsoft.AspNetCore.Mvc;
+
+// async Task DigitalTwinOutput(HttpContext context)
+// {
+//     Console.WriteLine("Enter DigitalTwinOutput");
+
+//     var client = context.RequestServices.GetRequiredService<DaprClient>();
+//     //var transaction = await JsonSerializer.DeserializeAsync<Transaction>(context.Request.Body, serializerOptions);
+//     Console.WriteLine("Response Code:" + context.Response.StatusCode);
+//     Console.WriteLine("Headers Count: " + context.Response.Headers.Count);
+    
+//     StreamReader reader = new StreamReader(context.Request.Body, Encoding.UTF8);
+//     string content = await reader.ReadToEndAsync();
+//     Console.WriteLine("Subscriber received : " + content);
+// }
+
+// var builder = WebApplication.CreateBuilder(args);
+// builder.Services.AddDaprClient();
+// builder.Services.AddSingleton(new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+
+
+// var app = builder.Build();
+
+// if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+
+// //Dapr will send serialized event object vs. being raw CloudEvent
+// //app.UseCloudEvents();
+
+// //needed for Dapr pub/sub routing
+// app.MapSubscribeHandler();
+
+// // var dtOutputTopicOptions = new TopicOptions()
+// // {
+// //     Name = "dt-output",
+// //     PubsubName = "eventhubs-pubsub",
+// //     Metadata = new Dictionary<string, string>()
+// //     {
+// //         { "rawPayload", "false" }
+// //     }
+
+// // };
+
+// // app.MapPost("/dt-output", DigitalTwinOutput).WithTopic(dtOutputTopicOptions);
+
+
+// // //Dapr subscription in [Topic] routes orders topic to this route
+// // app.MapPost("/dt-output", [Topic("eventhubs-pubsub", "dt-output")] (dynamic data) => {
+// //     Console.WriteLine("Subscriber received : " + data);
+// //     return Results.Ok(data);
+// // });
+
+
+// // app.MapPost("/eventhubs-input", (dynamic data) => {
+// //     Console.WriteLine("Subscriber received : " + data.ToString());
+// //     return Results.Ok(data);
+// // });
+
+
+// app.MapPost("/declarative-route", (dynamic data) =>
+// {
+//     Console.WriteLine("Subscriber test with subscription declarative : " + data);
+//     return Results.Ok(data);
+// });
+
+
+// await app.RunAsync();
+
+// public record Order([property: JsonPropertyName("orderId")] int OrderId);
+// public record Data([property: JsonPropertyName("temperature")] double Temperature);
+

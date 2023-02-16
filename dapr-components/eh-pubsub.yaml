@@ -1,0 +1,18 @@
+apiVersion: dapr.io/v2alpha1
+kind: Component
+metadata:
+  name: eventhubs-pubsub
+spec:
+  type: pubsub.azure.eventhubs
+  version: v1
+  metadata:
+  - name: connectionString    
+    value: "Endpoint=sb://eh-101.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=a9de7PG7Dg0OCeeFsNr4Z7Bo49SL+JP0UmHjq38CIfg="
+  - name: enableEntityManagement
+    value: "false"
+  - name: storageAccountName
+    value: "dt101sta"
+  - name: storageAccountKey
+    value: "P6InFS8NAPoXmobQygSNg+JXhu/QIR7ecenMRboJlakkvWl5RWpQilP1g1lxbiSHJ6naESa2SsBg+AStMRVstg=="
+  - name: storageContainerName
+    value: "pubsub-leases"
